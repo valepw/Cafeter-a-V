@@ -1,21 +1,20 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const form = document.getElementById("pedidoForm");
-    const totalElement = document.getElementById("total");
+function mostrarPantalla(id) {
+    document.getElementById("pantallaInicio").style.display = "none";
+    document.getElementById("pantallaPedido").style.display = "none";
+    document.getElementById("pantallaConfirmacion").style.display = "none";
 
-    function calcularTotal() {
-        let total = 0;
-        total += parseInt(document.getElementById("cafe").value);
-        total += parseInt(document.getElementById("tamaño").value);
-        total += parseInt(document.getElementById("extras").value);
-        totalElement.textContent = total;
-    }
+    document.getElementById(id).style.display = "block";
+}
 
-    document.getElementById("cafe").addEventListener("change", calcularTotal);
-    document.getElementById("tamaño").addEventListener("change", calcularTotal);
-    document.getElementById("extras").addEventListener("change", calcularTotal);
+function calcularTotal() {
+    let cafe = document.getElementById("cafe");
+    let tamano = document.getElementById("tamaño");
+    let extras = document.getElementById("extras");
 
-    form.addEventListener("submit", function(event) {
-        event.preventDefault();
-        alert("¡Pedido confirmado! ☕ Gracias por comprar en Cafetería Vale.");
-    });
-});
+    let total = parseInt(cafe.value) + parseInt(tamano.value) + parseInt(extras.value);
+
+    document.getElementById("cafeSeleccionado").textContent = cafe.options[cafe.selectedIndex].text;
+    document.getElementById("tamanoSeleccionado").textContent = tamano.options[tamano.selectedIndex].text;
+    document.getElementById("extrasSeleccionados").textContent = extras.options[extras.selectedIndex].text;
+    document.getElementById("total").textContent = total;
+}
