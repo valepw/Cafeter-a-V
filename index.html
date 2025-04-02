@@ -3,58 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Haz tu Pedido - Cafetería Vale</title>
+    <title>Cafetería Vale - Pedido</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <div class="container">
-        <h1>☕ Cafetería Vale ☕</h1>
+    <div class="container" id="pantallaInicio">
+        <h1>☕ Bienvenido a Cafetería Vale ☕</h1>
+        <button onclick="mostrarPantalla('pantallaPedido')">Hacer Pedido</button>
+    </div>
+
+    <div class="container" id="pantallaPedido" style="display: none;">
         <h2>Haz tu Pedido</h2>
+        <label for="cafe">☕ Tipo de Café:</label>
+        <select id="cafe">
+            <option value="30">Americano - $30 MXN</option>
+            <option value="40">Espresso - $40 MXN</option>
+            <option value="50">Capuchino - $50 MXN</option>
+            <option value="55">Latte - $55 MXN</option>
+            <option value="45">Mocha - $45 MXN</option>
+        </select>
 
-        <form id="pedidoForm">
-            <label for="fecha">📅 Fecha del Pedido:</label>
-            <input type="date" id="fecha" required>
+        <label for="tamaño">📏 Tamaño:</label>
+        <select id="tamaño">
+            <option value="0">Chico</option>
+            <option value="5">Mediano +$5 MXN</option>
+            <option value="10">Grande +$10 MXN</option>
+        </select>
 
-            <label for="nombre">👤 Tu Nombre:</label>
-            <input type="text" id="nombre" placeholder="Tu Nombre" required>
+        <label for="extras">🥛 Extras:</label>
+        <select id="extras">
+            <option value="0">Ninguno</option>
+            <option value="10">Leche de Almendra +$10 MXN</option>
+            <option value="5">Jarabe de Vainilla +$5 MXN</option>
+            <option value="5">Jarabe de Caramelo +$5 MXN</option>
+        </select>
 
-            <label for="cafe">☕ Tipo de Café:</label>
-            <select id="cafe">
-                <option value="0">Selecciona un café</option>
-                <option value="30">Americano - $30 MXN</option>
-                <option value="40">Espresso - $40 MXN</option>
-                <option value="50">Capuchino - $50 MXN</option>
-                <option value="55">Latte - $55 MXN</option>
-                <option value="45">Mocha - $45 MXN</option>
-            </select>
+        <button onclick="calcularTotal(); mostrarPantalla('pantallaConfirmacion')">Continuar</button>
+    </div>
 
-            <label for="tamaño">📏 Tamaño:</label>
-            <select id="tamaño">
-                <option value="0">Selecciona el tamaño</option>
-                <option value="0">Chico</option>
-                <option value="5">Mediano +$5 MXN</option>
-                <option value="10">Grande +$10 MXN</option>
-            </select>
+    <div class="container" id="pantallaConfirmacion" style="display: none;">
+        <h2>Confirmación</h2>
+        <p>☕ Café: <span id="cafeSeleccionado"></span></p>
+        <p>📏 Tamaño: <span id="tamanoSeleccionado"></span></p>
+        <p>🥛 Extras: <span id="extrasSeleccionados"></span></p>
+        <p><strong>Total: $<span id="total"></span> MXN</strong></p>
 
-            <label for="extras">🥛 Extras:</label>
-            <select id="extras">
-                <option value="0">Ninguno</option>
-                <option value="10">Leche de Almendra +$10 MXN</option>
-                <option value="5">Jarabe de Vainilla +$5 MXN</option>
-                <option value="5">Jarabe de Caramelo +$5 MXN</option>
-            </select>
-
-            <label>🚚 Método de Entrega:</label>
-            <div class="entrega-opciones">
-                <input type="radio" name="entrega" value="Domicilio" required> Domicilio
-                <input type="radio" name="entrega" value="Recoger" required> Recoger
-            </div>
-
-            <p><strong>Total: $<span id="total">0</span> MXN</strong></p>
-
-            <button type="submit">🛒 Confirmar Pedido</button>
-        </form>
+        <button onclick="alert('¡Pedido confirmado! ☕ Gracias por comprar en Cafetería Vale.')">Confirmar Pedido</button>
     </div>
 
     <script src="script.js"></script>
