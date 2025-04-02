@@ -1,44 +1,21 @@
-let carrito = [];
-let total = 0;
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById("pedidoForm");
+    const totalElement = document.getElementById("total");
 
-function agregarAlCarrito(nombre, precio) {
-    carrito.push({ nombre, precio });
-    total += precio;
-    actualizarCarrito();
-}
+    function calcularTotal() {
+        let total = 0;
+        total += parseInt(document.getElementById("cafe").value);
+        total += parseInt(document.getElementById("tamaño").value);
+        total += parseInt(document.getElementById("extras").value);
+        totalElement.textContent = total;
+    }
 
-function actualizarCarrito() {
-    const listaCarrito = document.getElementById("lista-carrito");
-    const totalCarrito = document.getElementById("total-carrito");
-    const contadorCarrito = document.getElementById("contador-carrito");
+    document.getElementById("cafe").addEventListener("change", calcularTotal);
+    document.getElementById("tamaño").addEventListener("change", calcularTotal);
+    document.getElementById("extras").addEventListener("change", calcularTotal);
 
-    listaCarrito.innerHTML = "";
-    carrito.forEach((item, index) => {
-        let li = document.createElement("li");
-        li.textContent = `${item.nombre} - $${item.precio}`;
-        let btnEliminar = document.createElement("button");
-        btnEliminar.textContent = "X";
-        btnEliminar.onclick = () => eliminarDelCarrito(index);
-        li.appendChild(btnEliminar);
-        listaCarrito.appendChild(li);
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
+        alert("¡Pedido confirmado! ☕ Gracias por comprar en Cafetería Vale.");
     });
-
-    totalCarrito.textContent = total;
-    contadorCarrito.textContent = carrito.length;
-}
-
-function eliminarDelCarrito(index) {
-    total -= carrito[index].precio;
-    carrito.splice(index, 1);
-    actualizarCarrito();
-}
-
-function vaciarCarrito() {
-    carrito = [];
-    total = 0;
-    actualizarCarrito();
-}
-
-document.getElementById("ver-carrito").addEventListener("click", () => {
-    document.getElementById("carrito").classList.toggle("hidden");
 });
